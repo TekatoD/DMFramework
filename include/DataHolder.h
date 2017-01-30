@@ -31,10 +31,10 @@ namespace DM {
             return dictionary[name];
         }
 
-//        template<class T>
-//        std::shared_ptr<T> getPointer(const std::string& name) {
-//            return dictionary[name].get<std::shared_ptr<T>>();
-//        }
+        template<class T>
+        std::shared_ptr<T> getPointer(const std::string& name) {
+            return dictionary[name].template get<std::shared_ptr<T>>();
+        }
 
     private:
         std::unordered_map<std::string, Field> dictionary;
