@@ -36,6 +36,13 @@ namespace DM {
             return dictionary[name].template get<std::shared_ptr<T>>();
         }
 
+        template<class T>
+        T getData(const std::string& name) {
+            return *getPointer<T>(name);
+        }
+
+        virtual void update() = 0;
+
     private:
         std::unordered_map<std::string, Field> dictionary;
     };

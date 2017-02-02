@@ -4,7 +4,7 @@
  */
 #pragma once
 
-namespace MD {
+namespace DM {
     class Ranked {
     public:
 

@@ -4,7 +4,8 @@ add_subdirectory(lib)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
-set(SRCS src/DataHolderTests.cpp)
+set(SRCS src/DataHolderTests.cpp
+        include/DataHolderTestImpl.h)
 
 
 add_executable(tests ${SRCS})

@@ -4,11 +4,11 @@
  */
 
 #include <gtest/gtest.h>
-#include "../../include/DataHolder.h"
+#include "include/DataHolderTestImpl.h"
 
 
 TEST(DataHolderTests, SetGetTest) {
-    DM::DataHolder<int, float, double> dataHolder;
+    DataHolderImpl<int, float, double> dataHolder;
     dataHolder.set("x", 0);
     auto x = dataHolder.getField("x");
     auto ptr = x.get<std::shared_ptr<int>>();
@@ -16,8 +16,10 @@ TEST(DataHolderTests, SetGetTest) {
 }
 
 TEST(DataHolderTests, TempalteGetTest) {
-    DM::DataHolder<int, float, double> dataHolder;
+    DataHolderImpl<int, float, double> dataHolder;
     dataHolder.set("x", 0);
     auto x = dataHolder.getPointer<int>("x");
     EXPECT_EQ(*x, (int)0);
+    int x1 = dataHolder.getData<int>("x");
+    EXPECT_EQ(x1, (int)0);
 }

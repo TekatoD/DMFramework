@@ -11,7 +11,13 @@ add_subdirectory(lib)
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(SOURCE_FILES
-        include/DataHolder.h include/Ranked.h src/Ranked.cpp)
+        include/DataHolder.h
+        include/Ranked.h
+        src/Ranked.cpp
+        src/AbstractState.cpp
+        include/AbstractState.h
+        include/AbstractEvent.h
+        include/Condition.h)
 
 add_library(DMFramework ${SOURCE_FILES})
 

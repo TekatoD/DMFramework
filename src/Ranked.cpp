@@ -5,11 +5,11 @@
 
 #include "include/Ranked.h"
 
-MD::Ranked::Ranked() : mProbability(0.0), mFactor(1.0) { }
+DM::Ranked::Ranked() : mProbability(0.0), mFactor(1.0) { }
 
-MD::Ranked::Ranked(double probability, double factor)  : mProbability(probability), mFactor(factor) { }
+DM::Ranked::Ranked(double probability, double factor)  : mProbability(probability), mFactor(factor) { }
 
-void MD::Ranked::setProbability(double value) {
+void DM::Ranked::setProbability(double value) {
     if(value < 0.0) {
         value = 0.0;
     } else if(value >= 1.0) {
@@ -18,14 +18,14 @@ void MD::Ranked::setProbability(double value) {
     mProbability = value;
 }
 
-double MD::Ranked::getProbability() const {
+double DM::Ranked::getProbability() const {
     return mProbability;
 }
 
-void MD::Ranked::setFactor(double factor) {
+void DM::Ranked::setFactor(double factor) {
     mFactor = factor;
 }
 
-double MD::Ranked::getFactor() const {
+double DM::Ranked::getFactor() const {
     return mFactor;
 }
