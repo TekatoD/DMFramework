@@ -5,7 +5,6 @@
 #pragma once
 
 #include <functional>
-#include <vector>
 
 namespace DM {
     template<class R, class D>

@@ -17,7 +17,9 @@ set(SOURCE_FILES
         src/AbstractState.cpp
         include/AbstractState.h
         include/AbstractEvent.h
-        include/Condition.h)
+        include/Condition.h
+        include/EventGenerator.h
+        include/Transition.h)
 
 add_library(DMFramework ${SOURCE_FILES})
 
