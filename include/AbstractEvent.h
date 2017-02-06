@@ -5,25 +5,24 @@
 #pragma once
 
 #include <functional>
+#include <vector>
 
 namespace DM {
-    template<class R, class... Args, class... Names, Names... names>
+    template<class R, class D>
     class AbstractEvent {
     public:
-        AbstractEvent(std::function<R(Args...)> function) : mFunction(function) { }
+        AbstractEvent(std::function<R(D)> function) : mFunction(function) { }
 
-        template<class D>
         void update(D dataHolderPointer) {
-            mResult = mFunction(dataHolderPointer->getData<Args>(names)...);
+            mResult = mFunction(dataHolderPointer);
         };
 
         R getResult() const {
             return mResult;
         }
 
-
     private:
-        std::function<R(Args...)> mFunction;
+        std::function<R(D)> mFunction;
         R mResult;
     };
 }

@@ -15,6 +15,8 @@ namespace DM {
     public:
         typedef mapbox::util::variant<std::shared_ptr<Classes>...> Field;
 
+        typedef std::shared_ptr<DataHolder<Classes...>> DataHolderPtr;
+
         DataHolder() = default;
 
         template<typename T>
