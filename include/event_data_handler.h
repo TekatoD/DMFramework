@@ -38,6 +38,11 @@ namespace DM {
             }
         }
 
+        //TODO:: Test
+        std::shared_ptr<D> get_data_handler() const {
+            return m_data_handler_ptr;
+        }
+
     private:
         std::shared_ptr<D> m_data_handler_ptr;
         std::forward_list<std::shared_ptr<abstract_event<R, D>>> m_event_list;

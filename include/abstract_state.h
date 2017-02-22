@@ -5,6 +5,7 @@
 #pragma once
 
 #include <string>
+#include "data_handler.h"
 
 namespace DM {
     class abstract_state {
@@ -14,6 +15,9 @@ namespace DM {
         void set_name(const std::string &name);
 
         std::string get_name() const;
+
+        template<class D>
+        virtual void run(std::shared_ptr<D> d) = 0;
 
     private:
         std::string m_state_name;

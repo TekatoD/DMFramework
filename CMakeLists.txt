@@ -17,7 +17,8 @@ set(SOURCE_FILES
         include/condition.h
         include/event_data_handler.h
         include/transition.h
-        include/data_handler.h)
+        include/data_handler.h
+        include/transition_generator.h)
 
 add_library(DMFramework ${SOURCE_FILES})
 
