@@ -6,24 +6,20 @@ set(CMAKE_CXX_STANDARD 14)
 
 option(BUILD_TEST "Build tests." ON)
 
-add_subdirectory(lib)
-
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 set(SOURCE_FILES
-        include/DataHolder.h
-        include/Ranked.h
-        src/Ranked.cpp
-        src/AbstractState.cpp
-        include/AbstractState.h
-        include/AbstractEvent.h
-        include/Condition.h
-        include/EventGenerator.h
-        include/Transition.h)
+        include/ranked.h
+        src/ranked.cpp
+        src/abstract_state.cpp
+        include/abstract_state.h
+        include/abstract_event.h
+        include/condition.h
+        include/event_data_handler.h
+        include/transition.h
+        include/data_handler.h)
 
 add_library(DMFramework ${SOURCE_FILES})
-
-target_link_libraries(DMFramework variant)
 
 if(BUILD_TEST)
     add_subdirectory(test)
