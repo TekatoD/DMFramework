@@ -61,3 +61,10 @@ TEST_F(event_generator_fixture, remove) {
     EXPECT_TRUE(eventGenerator.is_events_list_empty());
     EXPECT_TRUE(m_event1->get_result());
 }
+
+TEST_F(event_generator_fixture, initializer_list_constructor) {
+    DM::event_data_handler<bool, data_handler_impl> eventGenerator(m_data_holder, {m_event1, m_event2});
+    eventGenerator.update();
+    EXPECT_TRUE(m_event1->get_result());
+    EXPECT_TRUE(m_event2->get_result());
+}
