@@ -5,20 +5,31 @@
 #pragma once
 
 #include <string>
+#include <memory>
 #include "data_handler.h"
 
 namespace DM {
+    template<class D>
     class abstract_state {
     public:
-        abstract_state(const std::string& name);
+        abstract_state(const std::string& name) : m_state_name(name), m_data_holder_ptr(nullptr) { }
 
-        void set_name(const std::string &name);
+        abstract_state(const std::string& name, std::shared_ptr<D> d) : m_data_holder_ptr(d), m_state_name(name) {
+            static_assert(std::is_base_of<data_handler, D>::value);
+        }
 
-        std::string get_name() const;
+        void set_name(const std::string &name) {
+            m_state_name = name;
+        }
 
-        template<class D>
-        virtual void run(std::shared_ptr<D> d) = 0;
+        std::string get_name() const {
+            return m_state_name;
+        }
 
+        virtual void run() = 0;
+
+    protected:
+        std::shared_ptr<D> m_data_holder_ptr;
     private:
         std::string m_state_name;
     };

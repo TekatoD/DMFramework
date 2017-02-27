@@ -13,7 +13,9 @@ namespace DM {
     public:
         transition_generator() = default;
 
-        transition_generator(std::initializer_list<transition<R, D>> init) : m_transition_list(init) { };
+        transition_generator(std::initializer_list<transition<R, D>> init) : m_transition_list(init) {
+            static_assert(std::is_base_of<data_handler, D>::value);
+        };
 
         void set(transition<R, D> t) {
             m_transition_list.emplace_front(t);

@@ -8,7 +8,6 @@
 #include "include/state_impl.h"
 #include "../../include/abstract_event.h"
 #include "../../include/event_data_handler.h"
-#include "../../include/abstract_state.h"
 #include "../../include/transition.h"
 
 class transition_fixture : public ::testing::Test {
@@ -40,8 +39,8 @@ protected:
 };
 
 TEST_F(transition_fixture, constructor_update) {
-    std::shared_ptr<state_impl> state1 = std::make_shared<state_impl>("state1");
-    std::shared_ptr<state_impl> state2 = std::make_shared<state_impl>("state2");
+    std::shared_ptr<state_impl> state1 = std::make_shared<state_impl>("state1", m_data_holder);
+    std::shared_ptr<state_impl> state2 = std::make_shared<state_impl>("state2", m_data_holder);
     DM::event_data_handler<bool, data_handler_impl> eventGenerator(m_data_holder);
     DM::transition<bool, data_handler_impl> transition{state1, state2, m_event1, m_event2};
     m_event_generator.update();
@@ -51,8 +50,8 @@ TEST_F(transition_fixture, constructor_update) {
 }
 
 TEST_F(transition_fixture, constructor_set) {
-    std::shared_ptr<state_impl> state1 = std::make_shared<state_impl>("state1");
-    std::shared_ptr<state_impl> state2 = std::make_shared<state_impl>("state2");
+    std::shared_ptr<state_impl> state1 = std::make_shared<state_impl>("state1", m_data_holder);
+    std::shared_ptr<state_impl> state2 = std::make_shared<state_impl>("state2", m_data_holder);
     DM::transition<bool, data_handler_impl> transition{state1, state2};
     transition.set(m_event1);
     transition.set(m_event2);
@@ -63,8 +62,8 @@ TEST_F(transition_fixture, constructor_set) {
 }
 
 TEST_F(transition_fixture, remove_empty) {
-    std::shared_ptr<state_impl> state1 = std::make_shared<state_impl>("state1");
-    std::shared_ptr<state_impl> state2 = std::make_shared<state_impl>("state2");
+    std::shared_ptr<state_impl> state1 = std::make_shared<state_impl>("state1", m_data_holder);
+    std::shared_ptr<state_impl> state2 = std::make_shared<state_impl>("state2", m_data_holder);
     DM::transition<bool, data_handler_impl> transition{state1, state2, m_event1, m_event2};
     transition.remove(m_event1);
     transition.remove(m_event2);

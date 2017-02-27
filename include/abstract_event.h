@@ -12,7 +12,9 @@ namespace DM {
     template<class R, class D>
     class abstract_event {
     public:
-        abstract_event(std::function<R(std::shared_ptr<D>)> function) : m_function(function) { }
+        abstract_event(std::function<R(std::shared_ptr<D>)> function) : m_function(function) {
+            static_assert(std::is_base_of<data_handler, D>::value);
+        }
 
         void update(std::shared_ptr<D> event_data_handler_pointer) {
             m_result = m_function(event_data_handler_pointer);

@@ -6,11 +6,10 @@
 #include <memory>
 #include "../include/abstract_state.h"
 
-class state_impl : public DM::abstract_state {
+class state_impl : public DM::abstract_state<data_handler_impl> {
 public:
-    state_impl(std::string name) : abstract_state(name) { }
+    state_impl(std::string name, std::shared_ptr<data_handler_impl> d) : abstract_state(name, d) { }
 
-    template <class D>
-    void run(std::shared_ptr<D> d) { }
+    void run() { }
 
 };

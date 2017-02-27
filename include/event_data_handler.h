@@ -13,11 +13,15 @@ namespace DM {
     template<class R, class D>
     class event_data_handler {
     public:
-        event_data_handler(std::shared_ptr<D> data_handler_ptr) : m_data_handler_ptr(data_handler_ptr) { }
+        event_data_handler(std::shared_ptr<D> data_handler_ptr) : m_data_handler_ptr(data_handler_ptr) {
+            static_assert(std::is_base_of<data_handler, D>::value);
+        }
 
         event_data_handler(std::shared_ptr<D> data_handler_ptr,
                            std::initializer_list<std::shared_ptr<abstract_event<R, D>>> init) :
-                                m_data_handler_ptr(data_handler_ptr), m_event_list(init) { }
+                                m_data_handler_ptr(data_handler_ptr), m_event_list(init) {
+                                    static_assert(std::is_base_of<data_handler, D>::value);
+                                }
 
         void set(std::shared_ptr<abstract_event<R, D>> event) {
             m_event_list.push_front(event);

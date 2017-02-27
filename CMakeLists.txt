@@ -11,14 +11,13 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 set(SOURCE_FILES
         include/ranked.h
         src/ranked.cpp
-        src/abstract_state.cpp
         include/abstract_state.h
         include/abstract_event.h
         include/condition.h
         include/event_data_handler.h
         include/transition.h
         include/data_handler.h
-        include/transition_generator.h)
+        include/transition_generator.h include/probability_event.h include/relationship.h)
 
 add_library(DMFramework ${SOURCE_FILES})
 
