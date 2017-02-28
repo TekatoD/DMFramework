@@ -46,7 +46,7 @@ TEST_F(transition_fixture, constructor_update) {
     m_event_generator.update();
     transition.update();
     EXPECT_FALSE(transition.is_events_list_empty());
-    EXPECT_TRUE(transition.is_triggered());
+    EXPECT_TRUE(transition.get_transition_value());
 }
 
 TEST_F(transition_fixture, constructor_set) {
@@ -58,7 +58,7 @@ TEST_F(transition_fixture, constructor_set) {
     m_event_generator.update();
     transition.update();
     EXPECT_FALSE(transition.is_events_list_empty());
-    EXPECT_TRUE(transition.is_triggered());
+    EXPECT_TRUE(transition.get_transition_value());
 }
 
 TEST_F(transition_fixture, remove_empty) {
@@ -70,5 +70,5 @@ TEST_F(transition_fixture, remove_empty) {
     m_event_generator.update();
     transition.update();
     EXPECT_TRUE(transition.is_events_list_empty());
-    EXPECT_FALSE(transition.is_triggered());
+    EXPECT_FALSE(transition.get_transition_value());
 }

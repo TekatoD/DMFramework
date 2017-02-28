@@ -8,20 +8,20 @@
 
 //TODO:: Test
 namespace DM {
-    template<class R, class D>
+    template<class D>
     class transition_generator {
     public:
         transition_generator() = default;
 
-        transition_generator(std::initializer_list<transition<R, D>> init) : m_transition_list(init) {
+        transition_generator(std::initializer_list<transition<bool, D>> init) : m_transition_list(init) {
             static_assert(std::is_base_of<data_handler, D>::value);
         };
 
-        void set(transition<R, D> t) {
+        void set(transition<bool, D> t) {
             m_transition_list.emplace_front(t);
         }
 
-        void remove(transition<R, D> t) {
+        void remove(transition<bool, D> t) {
             m_transition_list.remove(t);
         }
 
@@ -29,11 +29,11 @@ namespace DM {
             return m_transition_list.empty();
         }
 
-        std::shared_ptr<abstract_state> update() {
+        std::shared_ptr<abstract_state> update(std::shared_ptr<abstract_state> current_state) {
             if (this->is_transitions_exist()) {
                 for(auto t : m_transition_list) {
                     t->update();
-                    if(t->is_triggered()) {
+                    if(t->is_triggered() and t->get_initial_state() == current_state) {
                         return t->get_initial_state();
                     }
                 }
@@ -42,10 +42,8 @@ namespace DM {
                 return nullptr;
             }
         }
-
-
-
+        
     private:
-        std::forward_list<transition<R, D>> m_transition_list;
+        std::forward_list<transition<bool, D>> m_transition_list;
     };
 }

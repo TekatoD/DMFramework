@@ -34,7 +34,7 @@ namespace DM {
             return m_end_state;
         }
 
-        R is_triggered() const {
+        R get_transition_value() const {
             return m_triggered;
         }
 

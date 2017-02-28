@@ -13,11 +13,11 @@ set(SOURCE_FILES
         src/ranked.cpp
         include/abstract_state.h
         include/abstract_event.h
-        include/condition.h
         include/event_data_handler.h
         include/transition.h
         include/data_handler.h
-        include/transition_generator.h include/probability_event.h include/relationship.h)
+        include/transition_generator.h
+        include/relationship.h)
 
 add_library(DMFramework ${SOURCE_FILES})
 
