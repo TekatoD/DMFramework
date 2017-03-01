@@ -17,7 +17,8 @@ set(SOURCE_FILES
         include/transition.h
         include/data_handler.h
         include/transition_generator.h
-        include/relationship.h)
+        include/relationship.h
+        include/p_transition_generator.h)
 
 add_library(DMFramework ${SOURCE_FILES})
 

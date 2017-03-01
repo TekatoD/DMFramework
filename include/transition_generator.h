@@ -4,24 +4,25 @@
  */
 #pragma once
 
+#include <algorithm>
 #include "transition.h"
 
 //TODO:: Test
 namespace DM {
-    template<class D>
+    template<class D, class R = bool, class T = transition<R, D>>
     class transition_generator {
     public:
         transition_generator() = default;
 
-        transition_generator(std::initializer_list<transition<bool, D>> init) : m_transition_list(init) {
+        transition_generator(std::initializer_list<T> init) : m_transition_list(init) {
             static_assert(std::is_base_of<data_handler, D>::value);
         };
 
-        void set(transition<bool, D> t) {
+        void set(T t) {
             m_transition_list.emplace_front(t);
         }
 
-        void remove(transition<bool, D> t) {
+        void remove(T t) {
             m_transition_list.remove(t);
         }
 
@@ -31,19 +32,23 @@ namespace DM {
 
         std::shared_ptr<abstract_state> update(std::shared_ptr<abstract_state> current_state) {
             if (this->is_transitions_exist()) {
-                for(auto t : m_transition_list) {
-                    t->update();
-                    if(t->is_triggered() and t->get_initial_state() == current_state) {
-                        return t->get_initial_state();
-                    }
+                auto temp = std::find_if(m_transition_list.begin(), m_transition_list.end(),
+                                         [&current_state](const auto& el) {
+                    return el->is_triggered() && (el->get_initial_state() == current_state ||
+                                                 el->get_initial_state() == nullptr);
+                });
+                if(temp != m_transition_list.end()) {
+                    return temp->get_end_state();
                 }
-                return nullptr;
+                else {
+                    return current_state;
+                }
             } else {
-                return nullptr;
+                return current_state;
             }
         }
-        
-    private:
-        std::forward_list<transition<bool, D>> m_transition_list;
+
+    protected:
+        std::forward_list<T> m_transition_list;
     };
 }

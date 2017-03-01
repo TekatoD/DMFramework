@@ -32,7 +32,7 @@ namespace DM {
             return m_factor;
         }
 
-        double is_triggered() const {
+        double get_transition_value() const {
             return this->m_triggered * m_factor;
         }
 
