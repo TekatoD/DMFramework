@@ -38,7 +38,7 @@ namespace DM {
         void update() {
             if (!this->is_events_list_empty()) {
                 m_data_handler_ptr->update();
-                for (auto event : m_event_list) {
+                for (auto& event : m_event_list) {
                     event->update(m_data_handler_ptr);
                 }
             }

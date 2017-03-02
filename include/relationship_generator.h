@@ -22,7 +22,7 @@ namespace DM {
             if(this->is_transitions_exist()) {
                 auto temp = this->m_transition_list.end();
                 auto current_it = this->m_transition_list.begin();
-                for (auto t : this->m_transition_list) {
+                for (auto& t : this->m_transition_list) {
                     if (t.get_initial_state() == current_state || t.get_initial_state() == nullptr) {
                         t.update();
                         if(temp == this->m_transition_list.end()) {
@@ -47,7 +47,7 @@ namespace DM {
         std::vector<double> get_factors() const {
             std::vector<double> factors;
             factors.reserve((unsigned long)std::distance(this->m_transition_list.begin(), this->m_transition_list.end()));
-            for(auto x : this->m_transition_list) {
+            for(const auto& x : this->m_transition_list) {
                 factors.push_back(x.get_factor());
             }
             return std::move(factors);
@@ -56,7 +56,7 @@ namespace DM {
         void set_factors(std::vector<double> factors) {
             if((unsigned long)std::distance(this->m_transition_list.begin(), this->m_transition_list.end()) == factors.size()) {
                 size_t i = 0;
-                for(auto x : this->m_transition_list) {
+                for(auto& x : this->m_transition_list) {
                     x.set_factor(factors[i]);
                     ++i;
                 }

@@ -88,3 +88,15 @@ TEST_F(relationship_generator_fixture, remove_empty) {
     EXPECT_FALSE(transitionGenerator.is_transitions_exist());
     EXPECT_NE(curr, m_state2);
 }
+TEST_F(relationship_generator_fixture, factors) {
+    DM::relationship<data_handler_impl> transition{m_state1, m_state2, m_event1, m_event2};
+    DM::relationship<data_handler_impl> transition1{m_state1, m_state3, m_event3};
+    DM::relationship_generator<data_handler_impl> transitionGenerator;
+    transitionGenerator.set(transition);
+    transitionGenerator.set(transition1);
+    std::vector<double> factors_check{1.0, 1.0};
+    std::vector<double> factors_set_check{0.5, 0.5};
+    EXPECT_EQ(transitionGenerator.get_factors(), factors_check);
+    transitionGenerator.set_factors(factors_set_check);
+    EXPECT_EQ(transitionGenerator.get_factors(), factors_set_check);
+}
