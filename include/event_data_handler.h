@@ -14,13 +14,13 @@ namespace DM {
     class event_data_handler {
     public:
         event_data_handler(std::shared_ptr<D> data_handler_ptr) : m_data_handler_ptr(data_handler_ptr) {
-            static_assert(std::is_base_of<data_handler, D>::value);
+            static_assert(std::is_base_of<data_handler, D>::value, "class must be derived from data_handler and implement run");
         }
 
         event_data_handler(std::shared_ptr<D> data_handler_ptr,
                            std::initializer_list<std::shared_ptr<abstract_event<R, D>>> init) :
                                 m_data_handler_ptr(data_handler_ptr), m_event_list(init) {
-                                    static_assert(std::is_base_of<data_handler, D>::value);
+                                    static_assert(std::is_base_of<data_handler, D>::value, "class must be derived from data_handler and implement run");
                                 }
 
         void set(std::shared_ptr<abstract_event<R, D>> event) {

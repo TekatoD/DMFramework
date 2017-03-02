@@ -15,7 +15,7 @@ namespace DM {
         abstract_state(const std::string& name) : m_state_name(name), m_data_holder_ptr(nullptr) { }
 
         abstract_state(const std::string& name, std::shared_ptr<D> d) : m_data_holder_ptr(d), m_state_name(name) {
-            static_assert(std::is_base_of<data_handler, D>::value);
+            static_assert(std::is_base_of<data_handler, D>::value, "class must be derived from data_handler and implement run");
         }
 
         void set_name(const std::string &name) {

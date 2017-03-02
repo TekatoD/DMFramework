@@ -19,7 +19,7 @@ namespace DM {
         transition_generator() = default;
 
         transition_generator(std::initializer_list<T> init) : m_transition_list(init) {
-            static_assert(std::is_base_of<data_handler, D>::value);
+            static_assert(std::is_base_of<data_handler, D>::value, "class must be derived from data_handler and implement run");
         };
 
         void set(T t) {

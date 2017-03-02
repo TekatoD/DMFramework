@@ -16,14 +16,14 @@ namespace DM {
     public:
         transition(std::shared_ptr<abstract_state<D>> initial_state, std::shared_ptr<abstract_state<D>> end_state) :
                 m_initial_state(initial_state), m_end_state(end_state), m_triggered(false) {
-            static_assert(std::is_base_of<data_handler, D>::value);
+            static_assert(std::is_base_of<data_handler, D>::value, "class must be derived from data_handler and implement run");
         }
 
         template<class... abstract_event>
         transition(std::shared_ptr<abstract_state<D>> initial_state, std::shared_ptr<abstract_state<D>> end_state,
                    abstract_event... events) : m_initial_state(initial_state), m_end_state(end_state),
                                                     m_events{events...}, m_triggered(false) {
-            static_assert(std::is_base_of<data_handler, D>::value);
+            static_assert(std::is_base_of<data_handler, D>::value, "class must be derived from data_handler and implement run");
         }
 
         std::shared_ptr<abstract_state<D>> get_initial_state() const {
