@@ -5,8 +5,8 @@
 
 #include <gtest/gtest.h>
 #include "include/data_handler_impl.h"
-#include "../../include/abstract_event.h"
-#include "../../include/event_data_handler.h"
+#include "abstract_event.h"
+#include "event_data_handler.h"
 
 class event_generator_fixture : public ::testing::Test {
 public:

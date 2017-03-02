@@ -11,7 +11,7 @@
 #include <iostream>
 
 namespace DM {
-    template <class R, class D>
+    template <class D = data_handler, class R = bool>
     class transition {
     public:
         transition(std::shared_ptr<abstract_state<D>> initial_state, std::shared_ptr<abstract_state<D>> end_state) :
@@ -58,6 +58,17 @@ namespace DM {
                 }
             }
         }
+
+        bool operator==(const transition& rhs) const {
+            return m_initial_state == rhs.m_initial_state &&
+                   m_end_state == rhs.m_end_state &&
+                   m_events == rhs.m_events;
+        }
+
+        bool operator!=(const transition& rhs) const {
+            return !(rhs == *this);
+        }
+
     protected:
         R m_triggered;
     private:

@@ -4,7 +4,7 @@
  */
 
 #include <memory>
-#include "../include/abstract_state.h"
+#include "abstract_state.h"
 
 class state_impl : public DM::abstract_state<data_handler_impl> {
 public:

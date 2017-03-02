@@ -5,7 +5,7 @@
 
 #include <gtest/gtest.h>
 #include "include/data_handler_impl.h"
-#include "../../include/abstract_event.h"
+#include "abstract_event.h"
 
 class abstract_event_fixture : public ::testing::Test {
 public:

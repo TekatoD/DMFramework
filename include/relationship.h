@@ -8,21 +8,21 @@
 
 namespace DM {
     template<class D>
-    class relationship : public transition<double, D> {
+    class relationship : public transition<D, double> {
     public:
         relationship(std::shared_ptr<abstract_state<D>> initial_state, std::shared_ptr<abstract_state<D>> end_state) :
-                transition(initial_state, end_state), m_factor(1.0) { }
+                transition<D, double>(initial_state, end_state), m_factor(1.0) { }
 
         template<class... abstract_event>
-        transition(std::shared_ptr<abstract_state<D>> initial_state, std::shared_ptr<abstract_state<D>> end_state,
-                abstract_event... events) : transition(initial_state, end_state, events...), m_factor(1.0) { }
+        relationship(std::shared_ptr<abstract_state<D>> initial_state, std::shared_ptr<abstract_state<D>> end_state,
+                abstract_event... events) : transition<D, double>(initial_state, end_state, events...), m_factor(1.0) { }
 
         relationship(std::shared_ptr<abstract_state<D>> initial_state, std::shared_ptr<abstract_state<D>> end_state, double factor) :
-                transition(initial_state, end_state), m_factor(factor) { }
+                transition<D, double>(initial_state, end_state), m_factor(factor) { }
 
         template<class... abstract_event>
-        transition(std::shared_ptr<abstract_state<D>> initial_state, std::shared_ptr<abstract_state<D>> end_state, double factor,
-                abstract_event... events) : transition(initial_state, end_state, events...), m_factor(factor) { }
+        relationship(std::shared_ptr<abstract_state<D>> initial_state, std::shared_ptr<abstract_state<D>> end_state, double factor,
+                abstract_event... events) : transition<D, double>(initial_state, end_state, events...), m_factor(factor) { }
 
         void set_factor(double factor) {
             m_factor = factor;
@@ -33,7 +33,14 @@ namespace DM {
         }
 
         double get_transition_value() const {
-            return this->m_triggered * m_factor;
+            double temp = this->m_triggered * m_factor;
+            if (temp > 1.0) {
+                return 1.0;
+            } else if (temp < 0.0) {
+                return 0.0;
+            } else {
+                return temp;
+            }
         }
 
     private:

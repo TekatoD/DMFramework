@@ -9,7 +9,10 @@ set(SRCS
         src/event_generator_tests.cpp
         src/transition_tests.cpp
         include/data_handler_impl.h
-        include/state_impl.h)
+        include/state_impl.h
+        src/relationship_tests.cpp
+        src/transition_generator_tests.cpp
+        src/relationship_generator_tests.cpp)
 
 
 add_executable(tests ${SRCS})

@@ -9,9 +9,13 @@
 
 //TODO:: Test
 namespace DM {
-    template<class D, class R = bool, class T = transition<R, D>>
+    template<class D, class R = bool, class T = transition <D, R>>
     class transition_generator {
     public:
+        using result_type = R;
+        using transition_type = T;
+        using data_handler_type = D;
+
         transition_generator() = default;
 
         transition_generator(std::initializer_list<T> init) : m_transition_list(init) {
@@ -27,20 +31,24 @@ namespace DM {
         }
 
         bool is_transitions_exist() const {
-            return m_transition_list.empty();
+            return !m_transition_list.empty();
         }
 
-        std::shared_ptr<abstract_state> update(std::shared_ptr<abstract_state> current_state) {
+        std::shared_ptr<abstract_state<D>> update(std::shared_ptr<abstract_state<D>> current_state) {
             if (this->is_transitions_exist()) {
                 auto temp = std::find_if(m_transition_list.begin(), m_transition_list.end(),
-                                         [&current_state](const auto& el) {
-                    return el->is_triggered() && (el->get_initial_state() == current_state ||
-                                                 el->get_initial_state() == nullptr);
-                });
-                if(temp != m_transition_list.end()) {
+                                         [&current_state](auto& el) {
+                                             if (el.get_initial_state() == current_state ||
+                                                 el.get_initial_state() == nullptr) {
+                                                 el.update();
+                                                 return el.get_transition_value();
+                                             } else {
+                                                 return false;
+                                             }
+                                         });
+                if (temp != m_transition_list.end()) {
                     return temp->get_end_state();
-                }
-                else {
+                } else {
                     return current_state;
                 }
             } else {
