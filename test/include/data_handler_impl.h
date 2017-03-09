@@ -28,8 +28,17 @@ public:
         return m_t;
     }
 
+    void set_curr_state(const std::string& name) {
+        m_curr_state = name;
+    }
+
+    std::string get_curr_state() {
+        return m_curr_state;
+    }
+
 private:
     double m_x;
     double m_y;
     bool m_t;
+    std::string m_curr_state;
 };

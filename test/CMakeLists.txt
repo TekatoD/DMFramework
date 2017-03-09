@@ -12,7 +12,8 @@ set(SRCS
         include/state_impl.h
         src/relationship_tests.cpp
         src/transition_generator_tests.cpp
-        src/relationship_generator_tests.cpp)
+        src/relationship_generator_tests.cpp
+        src/state_machine_tests.cpp)
 
 
 add_executable(tests ${SRCS})

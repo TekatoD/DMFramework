@@ -7,7 +7,6 @@
 #include <algorithm>
 #include "transition.h"
 
-//TODO:: Test
 namespace DM {
     template<class D, class R = bool, class T = transition <D, R>>
     class transition_generator {
